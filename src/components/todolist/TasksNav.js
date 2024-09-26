@@ -3,18 +3,14 @@ import { MdOutlineCalendarMonth } from "react-icons/md";
 import { LuInbox } from "react-icons/lu";
 import { GoDotFill } from "react-icons/go";
 import { LuClock4 } from "react-icons/lu";
-import {Component} from "react";
+import { FaChevronDown } from "react-icons/fa";
+import {AiOutlinePlus} from "react-icons/ai";
+import { CiSearch } from "react-icons/ci";
+import { CgProfile } from "react-icons/cg";
 
-class TasksNav extends Component {
+export const TasksNav = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-
-        }
-    }
-
-    renderCategoriesIcon = (el) => {
+    const renderCategoriesIcon = (el) => {
         switch (el.key) {
             case 'incomingTasks':
                 return <LuInbox id='inbox-ico' className='nav-icons'/>
@@ -29,27 +25,61 @@ class TasksNav extends Component {
         }
     }
 
-    getCurrentTasksListLength = (el) => el.len > 0 ? this.props.getLengthTasks(el.len) : ""
+    const getCurrentTasksListLength = (el) => el.array.length > 0 ? props.getLengthTasks(el.array.length) : ""
 
-    render() {
-        return (
-            <nav style={this.props.showNav === true ? {} : {width: 0 + "px", minWidth: 0}}>
+    return (
+        <nav style={props.showNav === true ? {} : {transform: 'translateX(-350px)'}}>
 
-                <ul style={this.props.showNav === true ? {} : {transform: 'scaleX(0%)', color: 'transparent'}}>
+            <ul>
 
-                    {this.props.tasksCategories.map(el => (
-                        <li style={this.props.currentCategory === el.key ? {fontWeight: 400, background: '#292e3e'} : {}} key={el.key} onClick={() => this.props.chooseTasksCategory(el.key, el.timeRange, el.timeRangeEnd)}>
-                            {this.renderCategoriesIcon(el)}
-                            {el.name}{this.getCurrentTasksListLength(el)}
-                        </li>
-                    ))}
+                <li className='user-profile-button'>
+                    <CgProfile className='nav-icon-profile'/>
+                    <span>Егор</span>
+                </li>
 
-                </ul>
+                <li className='nav-create-task-button' onClick={() => {props.onShowItemWindow()}}>
+                    <AiOutlinePlus className='nav-icons'/>
+                    <span>Добавить задачу</span>
+                </li>
 
-            </nav>
-        );
-    }
+                <li><CiSearch className='nav-icons'/>
+                    <span>Поиск</span>
+                </li>
+
+                {props.tasksCategories.map(el => (
+                    <li style={props.currentCategory === el.key ? {fontWeight: 400, background: 'rgb(60,67,97)'} : {}}
+                        key={el.key}
+                        onClick={() => props.chooseTasksCategory(el.key, el.timeRange, el.timeRangeEnd)}>
+
+                        {renderCategoriesIcon(el)}
+                        <span>{el.name}{getCurrentTasksListLength(el)}</span>
+                    </li>
+                ))}
+                <div style={{paddingTop: 20 + 'px'}}></div>
+                {props.filtersCategories.map(el => (
+                    <li className={props.currentFilter === el.key ? 'filter-li open' : 'filter-li'}
+                        style={props.currentFilter === el.key ? {fontWeight: 400, background: 'rgb(60,67,97)'} : {}}
+                        key={el.key} onClick={() => props.chooseFiltersCategory(el.key)}>
+
+                        <div className='filter-title'>
+                            <span>
+                                <FaChevronDown className='filters-ico'
+                                               style={props.currentFilter === el.key ? {} : {transform: 'rotate(-90deg)'}}/>
+                                {el.name}
+                            </span>
+                            <AiOutlinePlus className='filter-edit-ico'/>
+                        </div>
+
+                        <div className='sidebar-filter-content'>
+                            Какие то кнопки, списки и всякое такое(Фича)
+                        </div>
+
+                    </li>
+                ))}
+
+            </ul>
+
+        </nav>
+    );
 
 }
-
-export default TasksNav;

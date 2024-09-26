@@ -1,168 +1,132 @@
 import {AiOutlinePlus} from "react-icons/ai";
 
-import TaskEditWindow from "./TaskEditWindow";
-import {Component} from "react";
-import Task from "./Task";
-import TasksNav from "./TasksNav";
+import {TaskEditWindow} from "./TaskEditWindow";
+import {useState} from "react";
+import {Task} from "./Task";
+import {TasksNav} from "./TasksNav";
 
+export const today = String(new Date().toLocaleDateString());
+export const todayTime = String(new Date().toString().slice(16, 21));
+export let todayFormatted = `${today.slice(-4)}-${today.slice(3, 5)}-${today.slice(0, 2)}T${todayTime}`;
 
-const today = String(new Date().toLocaleDateString());
-let todayFormatted = `${today.slice(-4)}-${today.slice(3, 5)}-${today.slice(0, 2)}`;
+export const TasksManager = (props) => {
 
-class TasksManager extends Component {
+    const [showEditWindow, setShowEditTaskWindow] = useState(false);
+    const [tasks, setTasks] = useState([]);
+    const [currentCategory, setCurrentCategory] = useState('incomingTasks');
+    const [currentFilter, setCurrentFilter] = useState('');
 
-    constructor(props) {
-        super(props);
+    const incomingTasks ={
+        key: 'incomingTasks',
+        name: 'Входящие',
+        timeRangeStart: '',
+        timeRangeEnd: '',
+        array: [],
+    };
+    const todayTasks ={
+        key: 'todayTasks',
+        name: 'Сегодня',
+        timeRange: '',
+        timeRangeEnd: '',
+        array: [],
+    };
+    const sevenDaysTasks ={
+        key: 'sevenDaysTasks',
+        name: 'Предстоящее',
+        timeRange: '',
+        timeRangeEnd: '',
+        array: [],
+    };
+    const overdue ={
+        key: 'overdue',
+        name: 'Просрочено',
+        timeRange: '',
+        timeRangeEnd: '',
+        array: [],
+    };
 
-        this.state = {
-            showEditWindow: false,
-            tasks: [],
-            currentTasks: [],
-            todayTasks: [],
+    const projects = {
+        key: 'projects',
+        name: 'Проекты',
+    };
+    const marks = {
+        key: 'marks',
+        name: 'Метки',
+    };
+    const filters = {
+        key: 'filters',
+        name: 'Фильтры',
+    };
 
-            tasksCategories: [
-                {
-                    key: 'incomingTasks',
-                    name: 'Входящие',
-                    timeRangeStart: '',
-                    timeRangeEnd: '',
-                    len: 0,
-                },
-                {
-                    key: 'todayTasks',
-                    name: 'Сегодня',
-                    timeRange: '',
-                    timeRangeEnd: '',
-                    len: 0,
-                },
-                {
-                    key: 'sevenDaysTasks',
-                    name: 'Следующие 7 дней',
-                    timeRange: '',
-                    timeRangeEnd: '',
-                    len: 0,
-                },
-                {
-                    key: 'overdue',
-                    name: 'Просрочено',
-                    timeRange: '',
-                    timeRangeEnd: '',
-                    len: 0,
-                },
-                {
-                    key: 'twoWeeksTasks',
-                    name: 'Эти 2 недели',
-                    timeRange: '2024-09-23',
-                    timeRangeEnd: '2024-10-07',
-                    len: 0,
-                },
-            ],
+    const tasksCategories = [incomingTasks, todayTasks, sevenDaysTasks, overdue];
+    const filtersCategories = [projects, marks, filters];
 
-            currentCategory: 'incomingTasks',
-        }
+    incomingTasks.array = tasks;
+    todayTasks.array = tasks.filter(el => new Date(el.date).getTime() === new Date(todayFormatted.slice(0,10)).getTime());
+    sevenDaysTasks.array = tasks.filter(el => new Date(el.date).getTime() > (new Date(todayFormatted.slice(0,10)).getTime()) &&
+                                                new Date(el.date).getTime() < (new Date(todayFormatted.slice(0,10)).getTime() + (1000*60*60*24*7)))
+    overdue.array = tasks.filter(el => new Date(el.date+'T'+el.time).getTime() < new Date(todayFormatted).getTime());
 
-        this.state.currentTasks = this.state.tasks;
-
-        this.onShowEditWindow = this.onShowEditWindow.bind(this);
-        this.createTask = this.createTask.bind(this);
-        this.showTasks = this.showTasks.bind(this);
-        this.deleteTask = this.deleteTask.bind(this);
-        this.getLengthTasks = this.getLengthTasks.bind(this);
-        this.chooseTasksCategory = this.chooseTasksCategory.bind(this);
+    function chooseTasksCategory(category, rangeStart, rangeEnd) {
+        /*setCurrentTasks(tasks.filter(el => new Date(el.date).getTime() > (new Date(rangeStart).getTime()) &&
+                                             new Date(el.date).getTime() < (new Date(rangeEnd).getTime()))*/
+        setCurrentCategory(category);
+        setCurrentFilter('');
     }
 
-    render(){
-        return (
-            <main style={this.props.showNav === true ? {paddingLeft: 20 + '%'} : {paddingRight: 0, width: 100 + "%"}}>
-                    <TasksNav setAppId={this.props.setAppId} showNav={this.props.showNav}
-                              getLengthTasks={this.getLengthTasks} chooseTasksCategory={this.chooseTasksCategory}
-
-                              tasks={this.state.tasks} currentTasks={this.state.currentTasks}
-                              tasksCategories={this.state.tasksCategories}
-                              currentCategory={this.state.currentCategory}
-                    />
-
-                    <div>
-                        <section className="top-toolbar">
-                            <h1>Менеджер задач</h1>
-                        </section>
-
-                        <section className='tasks-list'>
-
-                            {this.state.currentTasks.length > 0 ?
-                               this.showTasks(this.state.currentTasks) : this.showNothing()}
-
-                           {this.state.showEditWindow &&
-                               <TaskEditWindow onShowItemWindow={this.onShowEditWindow} onCreateTask={this.createTask}/>}
-
-                      </section>
-                      <button className='tasks-add-button' onClick={() => {
-                           this.onShowEditWindow()
-                       }}><AiOutlinePlus className='edit-ico'/></button>
-
-                    </div>
-
-
-            </main>
-    );
+    function chooseFiltersCategory(filter) {
+        setCurrentFilter(filter);
     }
 
-    chooseTasksCategory(category, rangeStart, rangeEnd) {
-        switch (category) {
-            case 'incomingTasks':
-                this.setState({currentTasks: this.state.tasks});
-                break;
-            case 'todayTasks':
-                this.setState({currentTasks: this.state.tasks.filter(el => new Date(el.date).getTime() === new Date(todayFormatted).getTime())});
-                break;
-            case 'sevenDaysTasks':
-                this.setState({currentTasks: this.state.tasks.filter(el => new Date(el.date).getTime() > (new Date(todayFormatted).getTime()) &&
-                                                                                    new Date(el.date).getTime() < (new Date(todayFormatted).getTime() + (1000*60*60*24*7)))
-                });
-                break;
-            case 'overdue':
-                this.setState({currentTasks: this.state.tasks.filter(el => new Date(el.date).getTime() < new Date(todayFormatted).getTime())});
-                break;
-            default:
-                this.setState({currentTasks: this.state.tasks.filter(el => new Date(el.date).getTime() > (new Date(rangeStart).getTime()) &&
-                                                                                    new Date(el.date).getTime() < (new Date(rangeEnd).getTime()))
-                });
-                break;
-        }
-        this.setState({currentCategory: category});
-        alert(this.state.tasks.filter(el => el.date === todayFormatted).length + " ДАТА: " + (new Date('2024-10-06').getTime()))
-    }
-
-    getLengthTasks = (len) => {
+    const getLengthTasks = (len) => {
         return <b className='tasks-length-checker'>{len}</b>;
     }
 
-    showTasks = () => {
+    const showTasks = () => {
+
+        if ((currentCategory === 'incomingTasks' && incomingTasks.array.length === 0) ||
+            (currentCategory === 'todayTasks' && todayTasks.array.length === 0) ||
+            (currentCategory === 'sevenDaysTasks' && sevenDaysTasks.array.length === 0) ||
+            (currentCategory === 'overdue' && overdue.array.length === 0)) {
+            return (
+                <div className='tasks-empty'>
+                    <img src={'./images/tasks-empty.svg'} alt="sdfsdf"/>
+                    <h2>Ваше спокойствие бесценно</h2>
+                    <p>Отличная работа! Все ваши задачи организованы как надо.</p>
+                </div>
+            )
+        }
 
         return (
             <div>
-                {this.state.currentTasks.map(el => (
-                    <Task onDelete={this.deleteTask} key={el.id} task={el}/>
-                ))}
+                {
+                    currentCategory === 'incomingTasks' ?
+                        incomingTasks.array.map(el => (
+                            <Task onDelete={deleteTask} key={el.id} task={el} setDoneTask={setDoneTask}/>)) :
+                        currentCategory === 'todayTasks' ?
+                            todayTasks.array.map(el => (
+                                <Task onDelete={deleteTask} key={el.id} task={el} setDoneTask={setDoneTask}/>)) :
+                            currentCategory === 'sevenDaysTasks' ?
+                                sevenDaysTasks.array.map(el => (
+                                    <Task onDelete={deleteTask} key={el.id} task={el} setDoneTask={setDoneTask}/>)) :
+                                currentCategory === 'overdue' ?
+                                    overdue.array.map(el => (
+                                        <Task onDelete={deleteTask} key={el.id} task={el} setDoneTask={setDoneTask}/>)) :
+
+                    tasks.filter(el => new Date(el.date).getTime() > (new Date(todayFormatted).getTime()) &&
+                                        new Date(el.date).getTime() < (new Date(todayFormatted).getTime()))
+                }
             </div>
         )
     }
 
-    showNothing = () => {
-        return (
-            <div className='tasks-empty'>
-                Задач пока нет...
-            </div>
-        )
+    function onShowEditWindow() {
+        setShowEditTaskWindow(!showEditWindow);
     }
 
-    onShowEditWindow() {
-        this.setState({showEditWindow: !this.state.showEditWindow});
-    }
-
-    createTask() {
+    function createTask() {
         let inputAll = Array.from(document.querySelectorAll('#forms input, textarea'));
-        let arr = this.state.tasks;
+        let arr = tasks;
         let obj = {};
 
         let checkFieldsLength = inputAll.every((el) => el.value.length);
@@ -172,18 +136,76 @@ class TasksManager extends Component {
                 obj[input.id] = input.value;
             }
             obj['id'] = crypto.randomUUID();
+            obj['isTaskDone'] = false;
+
             arr.push(obj);
-            this.setState({tasks: arr});
-            this.onShowEditWindow();
-            return console.log('Добавлена задача: ' + arr);
+
+            setTasks(arr);
+            onShowEditWindow();
+            return console.log('Добавлена задача: ', obj, 'В список: ', arr);
         }
         return alert('Не все поля заполнены');
     }
 
-    deleteTask(id){
-        this.setState({tasks: this.state.tasks.filter(el => el.id !== id)});
+    const deleteTask = (id) => {
+        setTasks(tasks.filter(el => el.id !== id));
+        console.log(tasks);
     }
 
-}
+    function setDoneTask(id, funcSetCheckedState) {
+        let task = tasks.find(el => el.id === id);
 
-export default TasksManager;
+        task.isTaskDone = !task.isTaskDone;
+        funcSetCheckedState(task.isTaskDone);
+        setTimeout(() => deleteTask(id),3000);
+    }
+
+    return (
+        <main>
+            <TasksNav setAppId={props.setAppId} showNav={props.showNav}
+                      getLengthTasks={getLengthTasks} chooseTasksCategory={chooseTasksCategory}
+                      chooseFiltersCategory={chooseFiltersCategory}
+                      onShowItemWindow={onShowEditWindow}
+
+                      tasks={tasks}
+                      tasksCategories={tasksCategories}
+                      currentCategory={currentCategory}
+                      filtersCategories={filtersCategories}
+                      currentFilter={currentFilter}
+            />
+
+            <div className='task-manager' style={props.showNav === true ? {paddingLeft: 10 + '%'} : {}}>
+
+                <section className='tasks-list' style={props.showNav === true ? {width: 47 + '%'} : {}}>
+
+                    <section className="top-toolbar">
+                        <h1>{
+                            currentCategory === 'incomingTasks' ?
+                                'Входящие' :
+                                currentCategory === 'todayTasks' ?
+                                    'Сегодня' :
+                                    currentCategory === 'sevenDaysTasks' ?
+                                        'Предстоящее' :
+                                        currentCategory === 'overdue' ?
+                                            'Просрочено' :
+                                            'Какое-то окно'
+                        }
+                        </h1>
+                    </section>
+
+                    {showTasks()}
+                    <button className='tasks-add-button' onClick={() => {onShowEditWindow()}}>
+                        <AiOutlinePlus className='edit-ico'/>Добавить задачу
+                    </button>
+
+                    {showEditWindow &&
+                        <TaskEditWindow onShowItemWindow={onShowEditWindow} onCreateTask={createTask}/>}
+
+                </section>
+
+            </div>
+
+        </main>
+    );
+
+}

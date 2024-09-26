@@ -1,101 +1,67 @@
-import Footer from "./components/Footer";
-import {Component, useEffect} from "react";
-import TasksManager from "./components/todolist/TasksManager";
-import BudgetAccounting from "./components/budget/DudgetAccounting";
-import Header from "./components/Header";
-import Notes from "./components/notes/Notes";
-import Kanban from "./components/kanban/Kanban";
+import {useState} from "react";
 
-export const useClickOutside = (ref, callback, check, buttonRef) => {
+import {Header} from "./components/Header";
+import {Footer} from "./components/Footer";
+import {TasksManager} from "./components/todolist/TasksManager";
+import {TasksBoard} from "./components/board/TasksBoard";
+import {TasksCalendar} from "./components/calendar/TasksCalendar";
 
-    const handleClick = (event) => {
-        if (ref.current && !ref.current.contains(event.target) && buttonRef.current && !buttonRef.current.contains(event.target)) {
-            callback();
-        }
-    };
+export const App = (props) => {
 
-    useEffect(() => {
-        if (check === false) return ;
-        document.addEventListener("mousedown", handleClick);
-        return () => {
-            document.removeEventListener("mousedown", handleClick);
-        };
-    });
-}
+    const [appId, setAppId] = useState(0);
+    const [showNav, setShowNav] = useState(false);
+    const [showAppsList, setShowAppsList] = useState(false);
 
-class App extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-        appID: 0,
-        showNav: false,
-        showAppsList: false,
+    function onShowNav(){
+        setShowNav(!showNav);
     }
 
-    this.checkAppId = this.checkAppId.bind(this);
-    this.setAppId = this.setAppId.bind(this);
-    this.showNav = this.showNav.bind(this);
-    this.showAppsList = this.showAppsList.bind(this);
-    this.isClickOutside = this.isClickOutside.bind(this);
-  }
-
-    render() {
-        return (
-            <div className="wrapper">
-
-                <Header onShowNav={this.showNav} onShowAppsList={this.showAppsList} showAppsList={this.state.showAppsList} setAppId={this.setAppId} isClickOutside={this.isClickOutside}/>
-
-                {this.checkAppId()}
-
-                <Footer />
-
-            </div>
-        );
+    function onShowAppsList() {
+        setShowAppsList(!showAppsList);
     }
 
-    showNav(){
-        this.setState({showNav: !this.state.showNav});
+    function isClickOutside() {
+        setShowAppsList(false);
     }
 
-    showAppsList() {
-        this.setState({showAppsList: !this.state.showAppsList});
+    function chooseAppId(id) {
+        setAppId(id)
     }
 
-    isClickOutside() {
-        this.setState({showAppsList: false});
-    }
+    const checkAppId = () => {
 
-    setAppId(id) {
-      this.setState({appID: id})
-    }
+          const id = appId;
 
-    checkAppId = () => {
-
-      const id = this.state.appID;
-
-      const appChoice = () => {
-          switch (id) {
-              case 0:
-                  return <TasksManager setAppId={this.setAppId} showNav={this.state.showNav}/>
-              case 1:
-                  return <BudgetAccounting showNav={this.state.showNav}/>
-              case 2:
-                  return <Notes showNav={this.state.showNav}/>
-              case 3:
-                  return <Kanban showNav={this.state.showNav}/>
-              default:
-                  return <TasksManager />
+          const appChoice = () => {
+              switch (id) {
+                  case 0:
+                      return <TasksManager setAppId={chooseAppId} showNav={showNav}/>
+                  case 1:
+                      return <TasksBoard showNav={showNav}/>
+                  case 2:
+                      return <TasksCalendar showNav={showNav}/>
+                  default:
+                      return <TasksManager />
+              }
           }
-      }
 
-      return (
-          <div>
-              {appChoice()}
-          </div>
-      )
+          return (
+              <div>
+                  {appChoice()}
+              </div>
+          )
     }
 
-}
+    return (
+        <div className="wrapper">
 
-export default App;
+            <Header onShowNav={onShowNav} showNav={showNav} onShowAppsList={onShowAppsList} showAppsList={showAppsList} setAppId={chooseAppId} isClickOutside={isClickOutside}/>
+
+            {checkAppId()}
+
+            <Footer />
+
+        </div>
+    );
+
+}
