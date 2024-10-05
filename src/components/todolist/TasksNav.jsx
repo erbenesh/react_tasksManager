@@ -37,12 +37,13 @@ export const TasksNav = (props) => {
                     <span>Егор</span>
                 </li>
 
-                <li className='nav-create-task-button' onClick={() => {props.onShowItemWindow()}}>
+                <li className='nav-create-task-button' onClick={() => {props.onShowAbsoluteCreateWindow()}}>
                     <AiOutlinePlus className='nav-icons'/>
                     <span>Добавить задачу</span>
                 </li>
 
-                <li><CiSearch className='nav-icons'/>
+                <li>
+                    <CiSearch className='nav-icons'/>
                     <span>Поиск</span>
                 </li>
 
@@ -55,7 +56,9 @@ export const TasksNav = (props) => {
                         <span>{el.name}{getCurrentTasksListLength(el)}</span>
                     </li>
                 ))}
+
                 <div style={{paddingTop: 20 + 'px'}}></div>
+
                 {props.filtersCategories.map(el => (
                     <li className={props.currentFilter === el.key ? 'filter-li open' : 'filter-li'}
                         style={props.currentFilter === el.key ? {fontWeight: 400, background: 'rgb(60,67,97)'} : {}}

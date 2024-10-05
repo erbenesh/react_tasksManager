@@ -1,21 +1,20 @@
-
 import { IoIosRadioButtonOff } from "react-icons/io";
 import { IoIosRadioButtonOn } from "react-icons/io";
-
 import {todayFormatted} from "./TasksManager";
 import {useState} from "react";
 
 export const Task = (props) => {
 
     let isTaskOverdue = new Date(props.task.date + 'T' + props.task.time).getTime() < new Date(todayFormatted).getTime();
-    const [checked, setChecked] = useState(props.task.isTaskDone);
+    const [isChecked, setIsChecked] = useState(props.task.isTaskDone);
+
 
     const getTaskCheckRadio = () => {
 
         if (props.task.isTaskDone) {
-            return <IoIosRadioButtonOn className='task-radio-ico' onClick={() => props.setDoneTask(props.task.id, setChecked)}/>
+            return <IoIosRadioButtonOn className='task-radio-ico' onClick={() => props.setDoneTask(props.task.id, setIsChecked)}/>
         } else {
-            return <IoIosRadioButtonOff className='task-radio-ico' onClick={() => props.setDoneTask(props.task.id, setChecked)}/>
+            return <IoIosRadioButtonOff className='task-radio-ico' onClick={() => props.setDoneTask(props.task.id, setIsChecked)}/>
         }
     }
 

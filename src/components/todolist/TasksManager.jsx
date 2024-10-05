@@ -1,22 +1,24 @@
 import {AiOutlinePlus} from "react-icons/ai";
 
-import {TaskEditWindow} from "./TaskEditWindow";
+import {TaskCreateWindow} from "./TaskCreateWindow";
+import {TaskCreateAbsoluteWindow} from "./TaskCreateAbsoluteWindow";
 import {useState} from "react";
 import {Task} from "./Task";
 import {TasksNav} from "./TasksNav";
 
 export const today = String(new Date().toLocaleDateString());
 export const todayTime = String(new Date().toString().slice(16, 21));
-export let todayFormatted = `${today.slice(-4)}-${today.slice(3, 5)}-${today.slice(0, 2)}T${todayTime}`;
+export const todayFormatted = `${today.slice(-4)}-${today.slice(3, 5)}-${today.slice(0, 2)}T${todayTime}`;
 
 export const TasksManager = (props) => {
 
-    const [showEditWindow, setShowEditTaskWindow] = useState(false);
+    const [showCreateWindow, setShowCreateTaskWindow] = useState(false);
+    const [showAbsoluteCreateWindow, setShowAbsoluteCreateWindow] = useState(false);
     const [tasks, setTasks] = useState([]);
     const [currentCategory, setCurrentCategory] = useState('incomingTasks');
     const [currentFilter, setCurrentFilter] = useState('');
 
-    const incomingTasks ={
+    const incomingTasks = {
         key: 'incomingTasks',
         name: 'Входящие',
         timeRangeStart: '',
@@ -67,9 +69,7 @@ export const TasksManager = (props) => {
                                                 new Date(el.date).getTime() < (new Date(todayFormatted.slice(0,10)).getTime() + (1000*60*60*24*7)))
     overdue.array = tasks.filter(el => new Date(el.date+'T'+el.time).getTime() < new Date(todayFormatted).getTime());
 
-    function chooseTasksCategory(category, rangeStart, rangeEnd) {
-        /*setCurrentTasks(tasks.filter(el => new Date(el.date).getTime() > (new Date(rangeStart).getTime()) &&
-                                             new Date(el.date).getTime() < (new Date(rangeEnd).getTime()))*/
+    function chooseTasksCategory(category) {
         setCurrentCategory(category);
         setCurrentFilter('');
     }
@@ -88,11 +88,18 @@ export const TasksManager = (props) => {
             (currentCategory === 'todayTasks' && todayTasks.array.length === 0) ||
             (currentCategory === 'sevenDaysTasks' && sevenDaysTasks.array.length === 0) ||
             (currentCategory === 'overdue' && overdue.array.length === 0)) {
+            if (showCreateWindow === false){
+                return (
+                    <div className='tasks-empty'>
+                        <img src={'./images/tasks-empty.svg'} alt="sdfsdf"/>
+                        <h2>Ваше спокойствие бесценно</h2>
+                        <p>Отличная работа! Все ваши задачи организованы как надо.</p>
+                    </div>
+                )
+            }
             return (
                 <div className='tasks-empty'>
-                    <img src={'./images/tasks-empty.svg'} alt="sdfsdf"/>
-                    <h2>Ваше спокойствие бесценно</h2>
-                    <p>Отличная работа! Все ваши задачи организованы как надо.</p>
+
                 </div>
             )
         }
@@ -120,8 +127,17 @@ export const TasksManager = (props) => {
         )
     }
 
-    function onShowEditWindow() {
-        setShowEditTaskWindow(!showEditWindow);
+    function onShowCreateWindow() {
+        setShowCreateTaskWindow(!showCreateWindow);
+    }
+
+    function onShowAbsoluteCreateWindow() {
+        showCreateWindow && onShowCreateWindow();
+        setShowAbsoluteCreateWindow(!showAbsoluteCreateWindow);
+    }
+
+    function isClickOutsideCreateWindow() {
+        setShowAbsoluteCreateWindow(false);
     }
 
     function createTask() {
@@ -141,7 +157,8 @@ export const TasksManager = (props) => {
             arr.push(obj);
 
             setTasks(arr);
-            onShowEditWindow();
+            showCreateWindow && onShowCreateWindow();
+            showAbsoluteCreateWindow && onShowAbsoluteCreateWindow();
             return console.log('Добавлена задача: ', obj, 'В список: ', arr);
         }
         return alert('Не все поля заполнены');
@@ -157,15 +174,17 @@ export const TasksManager = (props) => {
 
         task.isTaskDone = !task.isTaskDone;
         funcSetCheckedState(task.isTaskDone);
-        setTimeout(() => deleteTask(id),3000);
+        deleteTask(id);
     }
 
     return (
         <main>
-            <TasksNav setAppId={props.setAppId} showNav={props.showNav}
-                      getLengthTasks={getLengthTasks} chooseTasksCategory={chooseTasksCategory}
+            <TasksNav setAppId={props.setAppId} 
+                      showNav={props.showNav}
+                      getLengthTasks={getLengthTasks}
+                      chooseTasksCategory={chooseTasksCategory}
                       chooseFiltersCategory={chooseFiltersCategory}
-                      onShowItemWindow={onShowEditWindow}
+                      onShowAbsoluteCreateWindow={onShowAbsoluteCreateWindow}
 
                       tasks={tasks}
                       tasksCategories={tasksCategories}
@@ -176,9 +195,9 @@ export const TasksManager = (props) => {
 
             <div className='task-manager' style={props.showNav === true ? {paddingLeft: 10 + '%'} : {}}>
 
-                <section className='tasks-list' style={props.showNav === true ? {width: 47 + '%'} : {}}>
+                <div className='tasks-list' style={props.showNav === true ? {width: 47 + '%'} : {}}>
 
-                    <section className="top-toolbar">
+                    <div className="top-toolbar">
                         <h1>{
                             currentCategory === 'incomingTasks' ?
                                 'Входящие' :
@@ -191,19 +210,31 @@ export const TasksManager = (props) => {
                                             'Какое-то окно'
                         }
                         </h1>
-                    </section>
+                    </div>
 
                     {showTasks()}
-                    <button className='tasks-add-button' onClick={() => {onShowEditWindow()}}>
-                        <AiOutlinePlus className='edit-ico'/>Добавить задачу
-                    </button>
 
-                    {showEditWindow &&
-                        <TaskEditWindow onShowItemWindow={onShowEditWindow} onCreateTask={createTask}/>}
+                    {
+                        showCreateWindow === false ? 
+                        <button className='tasks-add-button' onClick={() => {onShowCreateWindow()}}>
+                            <AiOutlinePlus className='edit-ico'/>Добавить задачу
+                        </button>
+                        : <TaskCreateWindow onShowCreateWindow={onShowCreateWindow} createTask={createTask}/>
+                    }
 
-                </section>
+
+                </div>
 
             </div>
+
+            {showAbsoluteCreateWindow && 
+                    <TaskCreateAbsoluteWindow 
+                        showAbsoluteCreateWindow={showAbsoluteCreateWindow}
+                        onShowAbsoluteCreateWindow={onShowAbsoluteCreateWindow} 
+                        createTask={createTask}
+                        isClickOutsideCreateWindow={isClickOutsideCreateWindow}
+                    />            
+            }
 
         </main>
     );

@@ -3,25 +3,16 @@ import {useState} from "react";
 import {Header} from "./components/Header";
 import {Footer} from "./components/Footer";
 import {TasksManager} from "./components/todolist/TasksManager";
-import {TasksBoard} from "./components/board/TasksBoard";
-import {TasksCalendar} from "./components/calendar/TasksCalendar";
+import {TasksBoard} from "./components/todolist/TasksBoard";
+import {TasksCalendar} from "./components/todolist/TasksCalendar";
 
 export const App = (props) => {
 
     const [appId, setAppId] = useState(0);
     const [showNav, setShowNav] = useState(false);
-    const [showAppsList, setShowAppsList] = useState(false);
 
     function onShowNav(){
         setShowNav(!showNav);
-    }
-
-    function onShowAppsList() {
-        setShowAppsList(!showAppsList);
-    }
-
-    function isClickOutside() {
-        setShowAppsList(false);
     }
 
     function chooseAppId(id) {
@@ -55,7 +46,7 @@ export const App = (props) => {
     return (
         <div className="wrapper">
 
-            <Header onShowNav={onShowNav} showNav={showNav} onShowAppsList={onShowAppsList} showAppsList={showAppsList} setAppId={chooseAppId} isClickOutside={isClickOutside}/>
+            <Header onShowNav={onShowNav} showNav={showNav} setAppId={chooseAppId}/>
 
             {checkAppId()}
 

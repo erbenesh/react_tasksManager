@@ -59,22 +59,30 @@ header .menu-button:hover {
 
 header .apps-button {
   position: relative;
-  width: 25px;
-  height: 25px;
+  display: flex;
+  width: auto;
   float: right;
-  margin-right: 5%;
+  margin-right: 1%;
   background: transparent;
-  padding: 0;
+  padding: 5px 10px 5px 10px;
   border: none;
   outline: none;
   color: #fff;
   cursor: pointer;
   transition: 0.3s;
   pointer-events: auto;
+  border-radius: 5px;
+}
+
+header .apps-button p {
+  position: relative;
+  display: inline-block;
+  margin-left: 5px;
+  top: 5px;
 }
 
 header .apps-button:hover {
-  color: #b3c0e8;
+  background: #444e6c;
 }
 
 .apps-ico{
@@ -289,7 +297,6 @@ nav .tasks-length-checker {
   display: inline-block;
   width: 15px;
   height: 15px;
-  float: right;
   text-align: center;
   font-size: 12px;
   font-weight: 400;
@@ -368,6 +375,7 @@ main .tasks-add-button {
   border-radius: 5px;
   transition: .3s;
   cursor: pointer;
+  margin-bottom: 20px;
 }
 
 main .tasks-add-button:hover {
@@ -439,40 +447,53 @@ main .tasks-add-button:hover {
   height: 25px;
 }
 
-.edit-window {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
+.create-window {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgb(83, 87, 100);
+  margin-bottom: 20px;
+}
+
+.background-window {
   position: fixed;
   top: 0;
   left: 0;
-  bottom: 0;
   right: 0;
-  z-index: 999;
+  bottom: 0;
+  z-index: 9999;
+  overflow: auto;
 }
 
-.edit-window .edit-task{
+.create-absolute-window {
   position: relative;
-  width: 40%;
-  top: 20%;
-  left: 30%;
-  padding: 20px;
-  border-radius: 5px;
-  background: #323950;
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  width: 35%;
+  min-width: 450px;
+  height: auto;
+  margin: 15% auto;
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+  background-color: #292e3e;
 }
 
-.edit-window .edit-task .top{
+.create-window-date-inputs {
   position: relative;
   display: grid;
   grid-template-columns: repeat(auto-fill, 45%);
-  row-gap: 0;
   column-gap: 10%;
   width: 100%;
   margin-bottom: 10px;
 }
 
-.edit-window input {
+.create-window-date-inputs input {
   width: 100%;
   box-sizing: border-box;
   background: #292e3e;
@@ -484,23 +505,18 @@ main .tasks-add-button:hover {
   border-radius: 5px;
 }
 
-.edit-window .edit-task .bottom {
+.create-window-description-input {
   position: relative;
-  display: grid;
   width: 100%;
-  grid-template-columns: repeat(auto-fill, 100%);
-  max-width: 100%;
-  row-gap: 10px;
-  column-gap: 40px;
 }
 
-.edit-window .edit-task textarea {
+.create-window-description-input textarea {
   position: relative;
   width: 100%;
   box-sizing: border-box;
   padding: 10px;
   height: 100px;
-  background: #292e3e;
+  background: transparent;
   border: none;
   border-radius: 5px;
   outline: none;
@@ -508,55 +524,54 @@ main .tasks-add-button:hover {
   resize: none;
 }
 
-.edit-window .edit-task .edit-task-p {
-  margin-bottom: 5px;
-  font-size: 14px;
-}
-
-.edit-window .edit-task .bottom p {
-  width: 80px;
-  font-size: 14px;
-  font-weight: 400;
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-.edit-window .task-add-button {
+.buttons {
   position: relative;
-  width: 100%;
-  height: 50px;
-  background: #323950;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgb(83, 87, 100);
+  padding-top: 10px;
+}
+
+.buttons .event-buttons {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 220px;
+}
+
+.buttons .exit-button,
+.buttons .task-add-button {
+  position: relative;
+  width: auto;
   border: none;
   outline: none;
-  color: #e9e9e9;
-  font-size: 14px;
   cursor: pointer;
   border-radius: 5px;
   transition: .5s;
-  margin-bottom: auto;
+  padding: 10px;
+  background: #536b89;
+  color: #e9e9e9;
+  font-size: 14px;
+  &.project {
+    background: transparent;
+    display: flex;
+    column-gap: 5px;
+  }
+  &.exit {
+    background: #323950;
+    margin-right: 10px;
+  }
 }
 
-.edit-window .task-add-button:hover {
+.project-ico {
+  width: 10px;
+  height: 10px;
+  padding-top: 2px;
+}
+
+.buttons .exit-button:hover,
+.buttons .task-add-button:hover {
   background: #444e6c;
-}
-
-.edit-window .exit-button {
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  line-height: 0;
-  top: -30px;
-  right: 10px;
-  padding: 0;
-  border: none;
-  color: white;
-  cursor: pointer;
-  transition: .5s;
-  background: transparent;
-}
-
-.edit-window .exit-button:hover {
-  color: #985c5c;
 }
 
 footer {
