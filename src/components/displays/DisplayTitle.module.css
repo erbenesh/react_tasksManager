@@ -1,0 +1,12 @@
+.top_toolbar {
+    position: relative;
+    width: auto;
+    padding: 10px 0 10px 0;
+    user-select: none;
+    overflow: hidden;
+  }
+  
+h1 {
+    font-size: 24px;
+    font-weight: 400;
+}

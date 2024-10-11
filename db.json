@@ -1,0 +1,21 @@
+{
+  "settings": {
+    "showCompletedTasks": false
+  },
+  "tasks": [
+    {
+      "id": "e59b4b99-1cdb-4a6d-ac78-d87a4349bed4",
+      "date": "2024-10-07",
+      "time": "01:10",
+      "description": "Задача из базы данных",
+      "isTaskDone": true
+    },
+    {
+      "id": "1f3234fd-3b3e-4ef6-826b-246c1706d3d7",
+      "date": "2024-10-10",
+      "time": "23:55",
+      "description": "Сделать кнопку отображения выполненных задач",
+      "isTaskDone": true
+    }
+  ]
+}

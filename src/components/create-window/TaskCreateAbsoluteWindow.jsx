@@ -1,10 +1,12 @@
 import { useRef } from "react";
 
-import { useClickOutside } from "../hooks/useClickOutside";
+import styles from './CreateWindow.module.css'
 
-import { CreateWindowDescriptionInput } from "./createWindow/CreateWindowDescriptionInput";
-import { CreateWindowDateInputs } from "./createWindow/CreateWindowDateInputs";
-import { CreateWindowButtons } from "./createWindow/CreateWindowButtons";
+import { useClickOutside } from "./../../hooks/useClickOutside";
+
+import { CreateWindowDescriptionInput } from "./window/CreateWindowDescriptionInput";
+import { CreateWindowDateInputs } from "./window/CreateWindowDateInputs";
+import { CreateWindowButtons } from "./window/CreateWindowButtons";
 
 
 export const TaskCreateAbsoluteWindow = (props) => {
@@ -13,9 +15,9 @@ export const TaskCreateAbsoluteWindow = (props) => {
     useClickOutside(windowRef, () => props.isClickOutsideCreateWindow(), props.showAbsoluteCreateWindow);
 
     return (
-        <div className='background-window'>
+        <div className={styles.background_window}>
 
-            <div id='forms' className='create-absolute-window' ref={windowRef}>
+            <div id='forms' className={styles.create_absolute_window} ref={windowRef}>
 
                 <CreateWindowDateInputs />
 

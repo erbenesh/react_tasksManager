@@ -1,0 +1,120 @@
+.background_displays_window{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    width: 30vh;
+    border-radius: 5px;
+    right: 10px;
+    margin-top: 50px;
+    background: #292e3e;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    transition: .3s;
+    padding: 10px;
+}
+
+
+.displays_list {
+    display: block;
+}
+  
+h4{
+    position: relative;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    user-select: none;
+    margin-bottom: 10px;
+}
+  
+.displays_matrix {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    width: auto;
+    column-gap: 4px;
+    padding: 2px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: #1d202c;
+}
+  
+.display_box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    width: 10vh;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    box-sizing: border-box;
+    user-select: none;
+    font-size: 16px;
+    font-weight: 300;
+    transition: 0.2s;
+    background-color: transparent;
+}
+  
+.display_box:hover{
+    background: #444e6c;
+}
+  
+.displays_icon {
+    margin: 0 auto;
+    color: white;
+    width: 20px;
+    height: 20px;
+}
+  
+.display_name {
+    position: relative;
+    width: auto;
+    margin: 0 auto;
+    font-size: 12px;
+    font-weight: 400;
+    color: white;
+}
+
+.display_show_completed_task {
+    display: block;
+}
+
+.show_completed_task_button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    padding: 5px;
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: 300;
+    cursor: pointer;
+    background: transparent;
+    transition: .3s;
+}
+
+.show_completed_task_button:hover {
+    background: #444e6c;
+}
+
+.completed_icon {
+    color: rgb(160, 160, 180);
+    margin: auto 10px auto 5px;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+}
+
+.span_p {
+    margin: auto auto auto 0;
+    width: auto;
+    height: auto;
+    color: white;
+}

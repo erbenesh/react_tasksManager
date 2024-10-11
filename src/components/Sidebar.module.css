@@ -1,0 +1,172 @@
+nav {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 0;
+    flex-shrink: 0;
+    min-width: 210px;
+    max-width: 410px;
+    background: #323950;
+    padding-top: 2px;
+    z-index: 2;
+}
+
+.closed {
+    transform: translateX(-150px);
+}
+
+ul {
+    list-style: none;
+    padding: 10px;
+    transition: .3s;
+    width: auto;
+    box-sizing: border-box;
+    flex: 1;
+}
+
+.user_profile_button{
+    width: 95px;
+    padding: 5px;
+}
+
+.user_profile_button span{
+    line-height: 25px;
+}
+
+.nav_icon_profile {
+    position: relative;
+    width: 40px;
+    height: 25px;
+}
+
+.top_buttons {
+    position: relative;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.menu_button{
+    position: relative;
+    margin: auto 0 auto auto;
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+    background: transparent;
+}
+
+.menu_button:hover {
+    color: #b3c0e8;
+}
+
+.sidebar_menu_ico{
+    width: 18px;
+    height: 18px;
+}
+
+li {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    padding: 8px;
+    cursor: pointer;
+    user-select: none;
+    font-size: 14px;
+    font-weight: 300;
+    border-radius: 5px;
+    box-sizing: border-box;
+    line-height: 20px;
+    transition: 0.3s;
+}
+
+li:hover{
+    background: rgb(43, 49, 67);
+}
+
+.nav_create_task_button {
+    margin-bottom: 2px;
+}
+
+.nav_icons {
+    width: 20px;
+    height: 20px;
+}
+
+.filter_li {
+    display: grid;
+    padding-bottom: 5px;
+    border-radius: 5px;
+    transition: .3s;
+}
+
+.filter_li:hover{
+    background: rgb(43, 49, 67);
+}
+
+.filter_title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filters_ico {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-right: 10px;
+    color: rgb(160, 160, 180);
+}
+
+.filter_edit_ico {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    color: rgb(160, 160, 180);
+    transition: .3s;
+}
+
+.filter_edit_ico:hover {
+    color: #b3c0e8;
+}
+
+.sidebar_filter_content {
+    padding-top: .25em;
+    height: 0;
+    overflow: hidden;
+}
+
+.sidebar_filter_content_open{
+    height: auto;
+}
+
+.tasks_length_checker {
+    position: relative;
+    float: right;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #919191;
+}
+
+.app_sidebar_resizer {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 3px;
+    justify-self: flex-end;
+    cursor: col-resize;
+    resize: horizontal;
+}
+
+.app_sidebar_resizer:hover {
+    width: 1px;
+    background: #6b6b6b;
+}

@@ -1,0 +1,48 @@
+main {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-height: 100vh;
+    height: 100vh;
+}
+  
+.task_manager {
+  
+    padding-top: 50px;
+    transition: .3s;
+    width: 100%;
+    max-height: 100%;
+}
+  
+.displays_button {
+    position: absolute;
+    display: flex;
+    width: auto;
+    right: 25px;
+    top: 10px;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+    background: transparent;
+    color: #fff;
+    z-index: 500;
+}
+  
+p {
+    position: relative;
+    display: inline-block;
+    margin-left: 5px;
+    top: 5px;
+}
+  
+.displays_button:hover {
+    background: #444e6c;
+}
+  
+.displays_ico {
+    width: 25px;
+    height: 25px;
+}

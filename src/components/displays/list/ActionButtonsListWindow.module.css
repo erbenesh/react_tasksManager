@@ -1,0 +1,42 @@
+
+.buttons_action_list {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    right: -110px;
+    top: 40px;
+    row-gap: 5px;
+    padding: 5px;
+    border-radius: 10px;
+    background: #292e3e;
+    box-shadow: 0 0 15px rgb(0, 0, 0 , 0.5);
+    z-index: 999;
+}
+
+.buttons_action_list button {
+    display: flex;
+    flex-direction: row;
+    column-gap: 15px;
+    width: auto;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    line-height: 20px;
+    font-size: 12px;
+    font-weight: 400px;
+    color: aliceblue;
+    background: transparent;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.buttons_action_list button:hover {
+    background: #444e6c;
+}
+
+.trash_ico {
+    width: 20px;
+    height: 20px;
+}

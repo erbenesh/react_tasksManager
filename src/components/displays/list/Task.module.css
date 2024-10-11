@@ -1,0 +1,98 @@
+.task {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+    width: auto;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-top: 10px;
+    border-bottom: 1px solid rgb(83, 87, 100);
+}
+
+.task_info {
+    position: relative;
+    display: flex;
+    min-width: 80%;
+    flex-direction: column;
+    justify-content: left;
+    justify-items: left;
+    margin: 0;
+    padding: 0;
+}
+
+.task_radio_button {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: none;
+    padding: 0;
+    color: rgb(160, 160, 180);
+    cursor: pointer;
+    transition: .3s;
+    background: transparent;
+}
+
+.task_radio_ico {
+    width: 20px;
+    height: 20px;
+}
+
+.task_radio_button:hover {
+    color: rgb(100, 139, 189);
+}
+
+.task_description{
+    position: relative;
+    display: inline-block;
+    width: auto;
+    font-size: 14px;
+    font-weight: 400;
+    box-sizing: border-box;
+    overflow: hidden;
+    top: 0;
+}
+
+.date_and_time {
+    position: relative;
+    display: inline-block;
+}
+
+.task_date{
+    width: auto;
+    top: 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #606060;
+}
+
+.action_buttons {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+    width: auto;
+    height: 25px;
+}
+
+.action_buttons button {
+    display: inline-block;
+    width: auto;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: .3s;
+    padding: 1px;
+
+}
+
+.action_buttons button:hover {
+    background-color: rgb(100, 139, 189);
+}
+
+.dots_ico {
+    width: 25px;
+    height: 23px;
+    color: #606060;
+}
