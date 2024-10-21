@@ -2,63 +2,35 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    column-gap: 5px;
-    width: auto;
+    justify-content: space-between;
+    width: 100%;
     box-sizing: border-box;
     padding: 10px;
     margin-top: 10px;
     border-bottom: 1px solid rgb(83, 87, 100);
 }
 
-.task_info {
-    position: relative;
+.task_left_block {
     display: flex;
-    min-width: 80%;
-    flex-direction: column;
+    flex-direction: row;
+    column-gap: 5px;
+    box-sizing: border-box;
+}
+
+.task_info {
+    display: grid;
+    row-gap: 5px;
     justify-content: left;
     justify-items: left;
-    margin: 0;
-    padding: 0;
-}
-
-.task_radio_button {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: none;
-    padding: 0;
-    color: rgb(160, 160, 180);
-    cursor: pointer;
-    transition: .3s;
-    background: transparent;
-}
-
-.task_radio_ico {
-    width: 20px;
-    height: 20px;
-}
-
-.task_radio_button:hover {
-    color: rgb(100, 139, 189);
-}
-
-.task_description{
-    position: relative;
-    display: inline-block;
-    width: auto;
-    font-size: 14px;
-    font-weight: 400;
     box-sizing: border-box;
-    overflow: hidden;
-    top: 0;
+    cursor: pointer;
 }
 
 .date_and_time {
     position: relative;
-    display: inline-block;
 }
 
-.task_date{
+.task_date {
     width: auto;
     top: 0;
     font-size: 12px;
@@ -72,8 +44,23 @@
     column-gap: 5px;
     width: auto;
     height: 25px;
+    visibility: hidden;
+    opacity: 0;
 }
 
+.action_buttons_show {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+    width: auto;
+    height: 25px;
+    visibility: visible;
+    z-index: 1;
+    opacity: 1;
+    box-shadow: 0 0 12px 12px rgb(41, 46, 62);
+}
+
+.action_buttons_show button,
 .action_buttons button {
     display: inline-block;
     width: auto;
@@ -87,6 +74,7 @@
 
 }
 
+.action_buttons_show button:hover,
 .action_buttons button:hover {
     background-color: rgb(100, 139, 189);
 }

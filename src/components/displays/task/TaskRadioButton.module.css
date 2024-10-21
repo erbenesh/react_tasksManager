@@ -1,0 +1,20 @@
+.task_radio_button {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: none;
+    padding: 0;
+    color: rgb(160, 160, 180);
+    cursor: pointer;
+    transition: .3s;
+    background: transparent;
+}
+
+.task_radio_ico {
+    width: 20px;
+    height: 20px;
+}
+
+.task_radio_button:hover {
+    color: rgb(100, 139, 189);
+}

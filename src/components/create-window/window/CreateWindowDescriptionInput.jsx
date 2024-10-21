@@ -1,13 +1,28 @@
-import styles from '../CreateWindow.module.css'
+import styles from '../CreateWindow.module.css';
+import InputBase from '@mui/material/InputBase';
 
 export const CreateWindowDescriptionInput = (props) => {
     return (
         <div className={styles.create_window_description_input}>
 
-            <textarea name="description" id="description" cols="30" rows="10" minLength={2} maxLength={450}
-                        placeholder='Описание (до 450 символов)'>
-            </textarea>
-                
+            <InputBase
+                id="title"
+                sx={{ color: 'white', fontSize: 14, width: 100 + "%" }}
+                multiline
+                placeholder="Название задачи"
+                inputProps={{ 'aria-label': 'Название задачи' }}
+                size='small'
+            />
+
+            <InputBase
+                id="description"
+                sx={{ color: 'white', fontSize: 12, width: 100 + "%"}}
+                multiline
+                placeholder="Описание"
+                inputProps={{ 'aria-label': 'Описание' }}
+                size='small'
+            />
+
         </div>
     )
 }

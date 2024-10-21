@@ -1,0 +1,19 @@
+.task_description {
+    font-size: 12px;
+    font-weight: 300;
+    color: #afafaf; 
+    top: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+}
+
+.task_description_full {
+    font-size: 14px;
+    font-weight: 300;
+    color: #afafaf; 
+    top: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}

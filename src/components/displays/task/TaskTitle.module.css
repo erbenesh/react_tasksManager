@@ -1,0 +1,8 @@
+.task_title {
+    font-size: 14px;
+    font-weight: 400;
+    top: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    word-wrap: break-word;
+}

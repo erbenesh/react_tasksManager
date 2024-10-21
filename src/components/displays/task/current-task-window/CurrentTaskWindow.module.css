@@ -1,0 +1,148 @@
+.task_window_bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgb(0, 0, 0, 0.3);
+    z-index: 999;
+    place-content: center;
+}
+
+.task_window {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    
+    width: 45%;
+    height: 86%;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-sizing: border-box;
+
+    background: rgb(41, 46, 62);
+}
+
+.task_toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(83, 87, 100);
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.project_button {
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    color: ghostwhite;
+    width: 100px;
+    background: transparent;
+    transition: .3s;
+}
+
+.task_window__action_buttons {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+}
+
+.action_buttons {
+    width: auto;
+    border: none;
+    border-radius: 5px;
+    color: ghostwhite;
+    outline: none;
+    background: transparent;
+}
+
+.action_buttons:hover,
+.project_button:hover {
+    background: #4a5475;
+}
+
+.action_buttons_ico {
+    width: 20px;
+    height: 20px;
+}
+
+.task_container {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding-left: 20px;
+}
+
+.task_radio_button {
+    width: 25px;
+    height: 20px;
+    margin-top: 20px;
+}
+
+.task_info {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-width: 66%;
+    padding: 20px 15px 15px 5px;
+}
+
+.task_card {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+.task_card__info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgb(83, 87, 100);
+}
+
+.add_subtask_button {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    width: 150px;
+    font-size: 12px;
+    color: ghostwhite;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.add_subtask_button:hover {
+    background: #4a5475;
+}
+
+.add_subtask_ico {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+}
+
+.task_comments_list {
+    display: flex;
+    flex-direction: column;
+}
+
+.right_sidebar{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 20px;
+    row-gap: 20px;
+    border-left: 1px solid rgb(83, 87, 100);
+    background: #323950;
+}

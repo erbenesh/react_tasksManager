@@ -11,6 +11,7 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     transition: .3s;
     padding: 10px;
+    z-index: 2;
 }
 
 
@@ -80,6 +81,7 @@ h4{
 
 .display_show_completed_task {
     display: block;
+    width: 100%;
 }
 
 .show_completed_task_button {
@@ -97,6 +99,7 @@ h4{
     cursor: pointer;
     background: transparent;
     transition: .3s;
+    width: 100%;
 }
 
 .show_completed_task_button:hover {

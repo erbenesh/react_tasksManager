@@ -3,7 +3,6 @@
 
 * {
   margin: 0;
-  width: 100%;
 }
 
 body {
@@ -12,4 +11,37 @@ body {
   font-weight: 400;
   font-style: normal;
   color: #e9e9e9;
+}
+
+.loader-container {
+  position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+  margin: auto;
+	width: 25px;
+	height: 25px;
+}
+
+.loader-circle {
+	width: 100%;
+	height: 100%;
+  padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+  float: left;
+	border: 3px solid rgb(0, 0, 0, 0.3);
+  border-bottom-color: #577290;
+	border-radius: 50%;
+	animation: spin 800ms infinite linear;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }

@@ -14,6 +14,7 @@ export function useTaskActions (onShowAbsoluteCreateWindow, onShowCreateWindow, 
             }
             obj['id'] = crypto.randomUUID();
             obj['isTaskDone'] = false;
+            delete obj[""];
 
             mutNewTask.mutate(obj);
             

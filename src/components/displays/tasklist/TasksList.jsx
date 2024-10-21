@@ -1,6 +1,6 @@
 import styles from './TasksList.module.css'
 
-import {Task} from "./Task";
+import {Task} from "../task/Task";
 
 export const TasksList = (props) => {
 

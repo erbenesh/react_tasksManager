@@ -1,12 +1,16 @@
+import { useState } from 'react'
 import styles from './DisplayTasksList.module.css'
 
 import { DisplayTitle } from "./DisplayTitle";
-import { TasksList } from "./list/TasksList";
+import { TasksList } from "./tasklist/TasksList";
 import { TaskCreateWindow } from "../create-window/TaskCreateWindow";
 
 import {AiOutlinePlus} from "react-icons/ai";
 
 export const DisplayTasksList = (props) => {
+
+    const [ showAddChapterButton, setShowAddChapterButton] = useState(false);
+
     return (
         <div className={styles.tasks_list}>
 
@@ -33,6 +37,13 @@ export const DisplayTasksList = (props) => {
                 : <TaskCreateWindow onShowCreateWindow={props.onShowCreateWindow} createTask={props.createTask}/>
             }
 
+            <div onMouseOver={() => setShowAddChapterButton(true)} onMouseOut={() => setShowAddChapterButton(false)}>
+
+                <button className={showAddChapterButton ? styles.add_chapter_button_show : styles.add_chapter_button}>
+                    Добавить раздел
+                </button>
+
+            </div>
 
         </div>
     );

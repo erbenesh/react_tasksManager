@@ -1,5 +1,5 @@
 import { DisplayTitle } from "./DisplayTitle";
-import { TasksList } from "./list/TasksList";
+import { TasksList } from "./tasklist/TasksList";
 import { TaskCreateWindow } from "../create-window/TaskCreateWindow";
 
 import {AiOutlinePlus} from "react-icons/ai";

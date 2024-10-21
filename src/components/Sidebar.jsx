@@ -140,6 +140,7 @@ export const Sidebar = (props) => {
                 ))}
 
             </ul>
+
             {props.showSidebar && <div className={styles.app_sidebar_resizer} onMouseDown={startResizing} />}
 
         </nav>

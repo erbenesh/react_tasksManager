@@ -1,8 +1,9 @@
 .tasks_list {
     position: relative;
-    width: 50%;
-    box-sizing: border-box;
     margin: 0 auto;
+    width: 50%;
+    max-width: 50%;
+    box-sizing: border-box;
 }
   
 .tasks_add_button {
@@ -30,4 +31,61 @@
     margin-right: 10px;
     margin-left: 10px;
     color: #577290;
+}
+
+.add_chapter_button {
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 600;
+    color: #577290;
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.add_chapter_button_show {
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #577290;
+    border: none;
+    outline: none;
+    background: transparent;
+    transition: 0.3s;
+    cursor: pointer;
+    visibility: visible;
+    opacity: 1;
+}
+
+.add_chapter_button:before,
+.add_chapter_button:after,
+.add_chapter_button_show:before,
+.add_chapter_button_show:after {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 100%;
+    height: 1px;
+    background-color: #577290;
+    position: relative;
+}
+
+.add_chapter_button:before,
+.add_chapter_button_show:before {
+    margin-left: -100%;
+    left: -14px;
+}
+
+.add_chapter_button:after,
+.add_chapter_button_show:after {
+    margin-right: -100%;
+    right: -14px;
 }

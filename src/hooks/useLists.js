@@ -2,7 +2,7 @@ import { todayFormatted } from "../TasksManager";
 
 export function useLists (isPending, data, isCompletedTasksHidden) {
 
-    const mainTasksArray = isPending === false ? data?.data : [];
+    const mainTasksArray = isPending === false ? data.data : [];
     const completedTasksHiddenArray = mainTasksArray.filter(el => el.isTaskDone === false);
     const tasksArray = !isCompletedTasksHidden ? completedTasksHiddenArray : mainTasksArray;
 

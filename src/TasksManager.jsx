@@ -86,7 +86,11 @@ export const TasksManager = () => {
     const [displayID, setDisplayID] = useState(0);
 
 
-    if (isPending) return (<div><h2>Loading...</h2></div>)
+    if (isPending) return (
+        <div className="loader-container">	
+            <i className="loader-circle"></i>
+        </div>
+    )
 
     if (error) return 'An error has occurred: ' + error.message
 
