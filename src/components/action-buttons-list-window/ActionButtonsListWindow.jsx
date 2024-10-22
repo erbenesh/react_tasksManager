@@ -4,7 +4,7 @@ import { PiTrashLight } from "react-icons/pi";
 
 import styles from './ActionButtonsListWindow.module.css'
 
-import { useClickOutsideWithButton } from '../../../hooks/useClickOutside';
+import { useClickOutsideWithButton } from '../../hooks/useClickOutside';
 
 export const ActionButtonsListWindow = (props) => {
 

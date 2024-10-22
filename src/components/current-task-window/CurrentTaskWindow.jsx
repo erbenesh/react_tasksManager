@@ -1,17 +1,16 @@
 import styles from './CurrentTaskWindow.module.css'
 
 import { useRef } from 'react'
-import { useClickOutside } from '../../../../hooks/useClickOutside';
 
-import { TaskRadioButton } from '../TaskRadioButton';
-import { TaskTitle } from '../TaskTitle';
-import { TaskDescription } from '../TaskDescription';
-
+import { TaskRadioButton } from '../task-radio-button/TaskRadioButton';
+import { TaskTitle } from '../task-title/TaskTitle';
+import { TaskDescription } from '../task-description/TaskDescription';
 import { CgChevronDown } from "react-icons/cg";
 import { CgChevronUp } from "react-icons/cg";
 import { CgClose } from "react-icons/cg";
 import { PiDotsThreeOutlineLight } from "react-icons/pi";
 import { AiOutlinePlus } from "react-icons/ai";
+import { useClickOutside } from './../../hooks/useClickOutside';
 
 export const CurrentTaskWindow = (props) => {
 

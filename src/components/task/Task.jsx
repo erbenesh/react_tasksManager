@@ -4,11 +4,11 @@ import styles from './Task.module.css'
 
 import { FiEdit3 } from "react-icons/fi";
 import { PiDotsThreeOutlineLight } from "react-icons/pi";
-import { ActionButtonsListWindow } from './ActionButtonsListWindow';
-import { CurrentTaskWindow } from './current-task-window/CurrentTaskWindow';
-import { TaskRadioButton } from './TaskRadioButton';
-import { TaskTitle } from './TaskTitle';
-import { TaskDescription } from './TaskDescription';
+import { ActionButtonsListWindow } from '../action-buttons-list-window/ActionButtonsListWindow';
+import { CurrentTaskWindow } from '../current-task-window/CurrentTaskWindow';
+import { TaskRadioButton } from '../task-radio-button/TaskRadioButton';
+import { TaskTitle } from '../task-title/TaskTitle';
+import { TaskDescription } from '../task-description/TaskDescription';
 
 export const Task = (props) => {
 
@@ -35,7 +35,7 @@ export const Task = (props) => {
 
     // const dragOverHandler = (e) => {
     //     e.preventDefault();
-    //     if (e.target.className === 'task') {
+    //     if (e.target.className === styles.task) {
     //         e.target.style.boxShadow = '0 2px 3px gray'
     //     }
     // }
@@ -61,11 +61,12 @@ export const Task = (props) => {
         // draggable={true} 
         // onDragOver={(e) => dragOverHandler(e)}
         // onDragLeave={e => dragLeaveHandler(e)}
-        // onDragStart={(e) => dragStartHandler(e, chapter, task)}
+        // onDragStart={(e) => dragStartHandler(e)}
         // onDragEnd={(e) => dragEndHandler(e)}
-        // onDrop={(e) => dropHandler(e, chapter, task)}
+        // onDrop={(e) => dropHandler(e)}
 
-        className={styles.task} onMouseOver={() => setShowActionButtons(true)} 
+        className={styles.task} 
+        onMouseOver={() => setShowActionButtons(true)} 
         onMouseOut={() => setShowActionButtons(false)}
         >
 

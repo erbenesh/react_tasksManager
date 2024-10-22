@@ -4,7 +4,7 @@ import styles from './ChooseDisplayWindow.module.css'
 
 import Switch from '@mui/material/Switch';
 
-import { useClickOutsideWithButton } from '../hooks/useClickOutside';
+import { useClickOutsideWithButton } from '../../hooks/useClickOutside';
 
 import { FaTasks } from "react-icons/fa";
 import { BsKanban } from "react-icons/bs";

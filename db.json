@@ -2,6 +2,32 @@
   "settings": {
     "showCompletedTasks": false
   },
+  "chapters": [
+    {
+      "id": "1",
+      "type": "main",
+      "title": "Входящие",
+      "tasks": []
+    },
+    {
+      "id": "2",
+      "type": "main",
+      "title": "Сегодня",
+      "tasks": []
+    },
+    {
+      "id": "3",
+      "type": "main",
+      "title": "Предстоящее",
+      "tasks": []
+    },
+    {
+      "id": "4",
+      "type": "custom",
+      "title": "Раздел",
+      "tasks": []
+    }
+  ],
   "tasks": [
     {
       "id": "1f3234fd-3b3e-4ef6-826b-246c1706d3d7",

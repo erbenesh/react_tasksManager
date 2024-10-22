@@ -1,4 +1,4 @@
-import { todayFormatted } from "../TasksManager";
+import { todayFormatted } from "../pages/task-manager/TasksManager";
 
 export function useLists (isPending, data, isCompletedTasksHidden) {
 

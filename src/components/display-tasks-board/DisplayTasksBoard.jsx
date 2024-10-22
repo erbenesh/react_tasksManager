@@ -1,8 +1,7 @@
-import { DisplayTitle } from "./DisplayTitle";
-import { TasksList } from "./tasklist/TasksList";
-import { TaskCreateWindow } from "../create-window/TaskCreateWindow";
-
 import {AiOutlinePlus} from "react-icons/ai";
+import { DisplayTitle } from '../display-title/DisplayTitle';
+import { TasksList } from '../tasks-list/TasksList';
+import { TaskCreateWindow } from '../create-task-window/TaskCreateWindow';
 
 export const DisplayTasksBoard = (props) => {
     

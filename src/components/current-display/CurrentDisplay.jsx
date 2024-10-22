@@ -1,5 +1,5 @@
-import { DisplayTasksBoard } from "./displays/DisplayTasksBoard";
-import { DisplayTasksList } from "./displays/DisplayTasksList";
+import { DisplayTasksList } from './../display-tasks-list/DisplayTasksList';
+import { DisplayTasksBoard } from './../display-tasks-board/DisplayTasksBoard';
 
 export const CurrentDisplay = (props) => {
 

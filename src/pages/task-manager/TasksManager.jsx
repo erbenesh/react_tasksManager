@@ -3,18 +3,18 @@ import { useState, useRef} from "react";
 import styles from './TasksManager.module.css'
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { taskService } from "./services/task.service";
-import { settingsService } from "./services/settings.service";
-import { useShowSome } from './hooks/useShowSome';
-import { useCurrents } from './hooks/useCurrents';
-import { useLists } from './hooks/useLists';
-import { useFilters } from "./hooks/useFilters";
-import { useTaskActions } from "./hooks/useTaskActions";
+import { taskService } from "../../services/task.service";
+import { settingsService } from "../../services/settings.service";
+import { useShowSome } from '../../hooks/useShowSome';
+import { useCurrents } from '../../hooks/useCurrents';
+import { useLists } from '../../hooks/useLists';
+import { useFilters } from "../../hooks/useFilters";
+import { useTaskActions } from "../../hooks/useTaskActions";
 
-import { TaskCreateAbsoluteWindow } from "./components/create-window/TaskCreateAbsoluteWindow";
-import { Sidebar } from "./components/Sidebar";
-import { CurrentDisplay } from "./components/CurrentDisplay";
-import { ChooseDisplayWindow } from "./components/ChooseDisplayWindow";
+import { TaskCreateAbsoluteWindow } from "../../components/create-task-window/TaskCreateAbsoluteWindow";
+import { Sidebar } from "../../components/sidebar/Sidebar";
+import { CurrentDisplay } from "../../components/current-display/CurrentDisplay";
+import { ChooseDisplayWindow } from "../../components/choose-display-window/ChooseDisplayWindow";
 
 import { VscSettings } from "react-icons/vsc";
 
@@ -22,7 +22,7 @@ export const today = String(new Date().toLocaleDateString());
 export const todayTime = String(new Date().toString().slice(16, 21));
 export const todayFormatted = `${today.slice(-4)}-${today.slice(3, 5)}-${today.slice(0, 2)}T${todayTime}`;
 
-export const TasksManager = () => {
+export const TasksManager = (props) => {
 
     const queryClient = useQueryClient();
 
@@ -95,7 +95,7 @@ export const TasksManager = () => {
     if (error) return 'An error has occurred: ' + error.message
 
     return (
-        <main>
+        <div className={styles.main_task_manager}>
 
             <Sidebar  
                     showSidebar={showSidebar}
@@ -148,7 +148,7 @@ export const TasksManager = () => {
                                     isShowCompletedTasks={!settingsData.isPending? settingsData.data?.showCompletedTasks : false} setIsShowCompletedTasks={setCompletedTasksSetting}
                                     />
 
-        </main>
+        </div>
     );
 
 }
