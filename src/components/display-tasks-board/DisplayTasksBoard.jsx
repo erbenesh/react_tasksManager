@@ -1,12 +1,18 @@
+import { useState } from 'react'
+import styles from './DisplayTasksBoard.module.css'
+
+import { DisplayTitle } from "../display-title/DisplayTitle";
+import { TasksList } from "../tasks-list/TasksList";
+import { TaskCreateWindow } from "../create-task-window/TaskCreateWindow";
+
 import {AiOutlinePlus} from "react-icons/ai";
-import { DisplayTitle } from '../display-title/DisplayTitle';
-import { TasksList } from '../tasks-list/TasksList';
-import { TaskCreateWindow } from '../create-task-window/TaskCreateWindow';
 
 export const DisplayTasksBoard = (props) => {
-    
+
+    const [ showAddChapterButton, setShowAddChapterButton] = useState(false);
+
     return (
-        <div className='tasks-list' style={props.showNav === true ? {width: 47 + '%'} : {}}>
+        <div className={styles.tasks_list}>
 
             <DisplayTitle currentCategory={props.currentCategory}/>
 
@@ -18,19 +24,26 @@ export const DisplayTasksBoard = (props) => {
                 sevenDaysTasks={props.sevenDaysTasks}
                 overdue={props.overdue}
                 showCreateWindow={props.showCreateWindow}
-                tasks={props.tasks}
                 deleteTask={props.deleteTask}
+
             />
 
             {
                 props.showCreateWindow === false ? 
-                <button className='tasks-add-button' onClick={() => {props.onShowCreateWindow()}}>
-                    <AiOutlinePlus className='edit-ico'/>
+                <button className={styles.tasks_add_button} onClick={() => {props.onShowCreateWindow()}}>
+                    <AiOutlinePlus className={styles.edit_ico}/>
                     Добавить задачу
                 </button>
                 : <TaskCreateWindow onShowCreateWindow={props.onShowCreateWindow} createTask={props.createTask}/>
             }
 
+            <div onMouseOver={() => setShowAddChapterButton(true)} onMouseOut={() => setShowAddChapterButton(false)}>
+
+                <button className={showAddChapterButton ? styles.add_chapter_button_show : styles.add_chapter_button}>
+                    Добавить раздел
+                </button>
+
+            </div>
 
         </div>
     );

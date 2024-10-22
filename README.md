@@ -10,3 +10,7 @@
 ### `npx json-server db.json -p 3001`
 
 ### `npm start`
+
+## Preview
+
+<img src="./public/readme-preview.gif" alt="preview gif" style='width: 800px'>
